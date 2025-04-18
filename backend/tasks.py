@@ -13,6 +13,7 @@ from worker import celery_app
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import os
 import csv
+from dotenv import load_dotenv
 
 templates_path = os.path.join(os.path.dirname(__file__), "templates")
 
@@ -67,8 +68,8 @@ The MovieCops Team
 
 def send_email(receiver_email, subject, message, html=None):
     try:
-        email_sender = "moviecopsreminders@gmail.com"
-        email_password = "gmgxrvchhvrgjfnq"
+        email_sender = os.getenv("EMAIL_SENDER")
+        email_password = os.getenv("EMAIL_PASSWORD")
 
         em = EmailMessage()
         em['From'] = receiver_email
