@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <img src="./assets/logo.png" width="50" height="50">
+        <img src="./assets/logo.png" width="50" alt="logo" height="50">
         <a class="navbar-brand" href="">&nbsp;MovieCops</a>
         <div class="collapse navbar-collapse" id="navbarElements">
           <ul class="navbar-nav me-auto">
@@ -13,10 +13,10 @@
               <router-link to="/shows" class="nav-link">Shows</router-link>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false" @keyup.enter="handleKeyPress">
                 User
-              </a>
+                </a>
               <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                 <div v-if="!token">
                   <router-link to="/login" class="dropdown-item">Login</router-link>
