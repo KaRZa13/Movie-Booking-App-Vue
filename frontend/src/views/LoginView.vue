@@ -23,8 +23,14 @@
                     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign In</button>
                 </div>
                 <div class="col-sm">
-                    <router-link to="/signup" class="w-100 btn btn-lg btn-outline-primary" role="button">Sign
-                        Up</router-link>
+                    <router-link 
+                        to="/signup" 
+                        class="w-100 btn btn-lg btn-outline-primary" 
+                        role="button" 
+                        @keydown="handleKeydown"
+                    >
+                        Sign Up
+                    </router-link>
                 </div>
             </div>
         </div>
