@@ -1,5 +1,5 @@
 # pyright: reportMissingImports=false, reportMissingModuleSource=false
-
+from dotenv import load_dotenv
 import time
 from worker import celery_app
 import tasks
@@ -15,15 +15,17 @@ import redis
 import datetime
 import threading
 import re
+import os
 
+load_dotenv()
 
 app = Flask(__name__)
 
 ACCESS_EXPIRES = datetime.timedelta(minutes=30)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///movieDB.sqlite"
-app.config["SECRET_KEY"] = "moviecops"
-app.config["JWT_SECRET_KEY"] = "moviecops"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+app.config["JWT_SECRET_KEY"] = os.getenv("SECRET_KEY")
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = ACCESS_EXPIRES
 
 
