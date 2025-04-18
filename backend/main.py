@@ -212,34 +212,44 @@ def user_monthly_report_job():
         with app.app_context():
             now = datetime.datetime.now()
             if now.day == 13:
-                users = User.query.all()
-                for user in users:
+                generate_monthly_reports(now)
+        time.sleep(60 * 10)
 
-                    start_date = datetime.datetime(now.year, now.month, 1)
-                    if now.month == 12:
-                        end_date = datetime.datetime(now.year + 1, 1, 1)
-                    else:
-                        end_date = datetime.datetime(
-                            now.year, now.month + 1, 1)
 
-                    monthly_booking = Booking.query.filter_by(user_email=user.email).filter(
-                        Booking.booking_time >= start_date,
-                        Booking.booking_time < end_date).all()
+def generate_monthly_reports(current_date):
+    users = User.query.all()
+    for user in users:
+        monthly_bookings = get_user_monthly_bookings(user.email, current_date)
+        if monthly_bookings:
+            formatted_bookings = format_bookings(monthly_bookings)
+            tasks.monthly_report.delay(
+                user.to_dict(), formatted_bookings, current_date.strftime('%B'), current_date.strftime('%Y')
+            )
 
-                    if len(monthly_booking) > 0:
-                        res = []
-                        for booking in monthly_booking:
-                            movie = Shows.query.filter_by(
-                                show_id=booking.show_id).first()
-                            booking_dict = dict()
-                            booking_dict.update({"movie_name": movie.name})
-                            booking_dict.update(
-                                {"booking_time": booking.booking_time.strftime('%d %B, %Y')})
-                            res.append(booking_dict)
 
-                        tasks.monthly_report.delay(
-                            user.to_dict(), res, now.strftime('%B'), now.strftime('%Y'))
-        time.sleep(60*10)
+def get_user_monthly_bookings(user_email, current_date):
+    start_date = datetime.datetime(current_date.year, current_date.month, 1)
+    end_date = (
+        datetime.datetime(current_date.year + 1, 1, 1)
+        if current_date.month == 12
+        else datetime.datetime(current_date.year, current_date.month + 1, 1)
+    )
+    return Booking.query.filter_by(user_email=user_email).filter(
+        Booking.booking_time >= start_date,
+        Booking.booking_time < end_date
+    ).all()
+
+
+def format_bookings(bookings):
+    formatted = []
+    for booking in bookings:
+        movie = Shows.query.filter_by(show_id=booking.show_id).first()
+        if movie:
+            formatted.append({
+                "movie_name": movie.name,
+                "booking_time": booking.booking_time.strftime('%d %B, %Y')
+            })
+    return formatted
 
 
 """
