@@ -7,7 +7,7 @@
             </div>
             <div v-else>
                 <div v-for="(booking, key) in bookings" :key="key" class="card" style="max-width: 18rem;">
-                    <img :src="require('@/assets/' + booking.image_src)" class="card-img-top" height="225">
+                    <img :src="require('@/assets/' + booking.image_src)" class="card-img-top" alt="cover de film" height="225">
                     <div class="card-body">
                         <h5 class="card-title">{{ booking.name }}</h5>
                         <p class="card-text">Seats:
