@@ -10,6 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity, get_jwt
 import redis
+from flask_wtf.csrf import CSRFProtect
 
 
 import datetime
@@ -20,6 +21,8 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
+csrf = CSRFProtect()
+csrf.init_app(app) 
 
 ACCESS_EXPIRES = datetime.timedelta(minutes=30)
 

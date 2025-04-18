@@ -1,0 +1,6 @@
+projectKey=Maintenance-Applicative
+serverUrl=http://localhost:9000
+serverVersion=25.3.0.104237
+dashboardUrl=http://localhost:9000/dashboard?id=Maintenance-Applicative
+ceTaskId=c4caa2b9-304c-4957-ae25-ae87a9354e07
+ceTaskUrl=http://localhost:9000/api/ce/task?id=c4caa2b9-304c-4957-ae25-ae87a9354e07
