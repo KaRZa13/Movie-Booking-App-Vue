@@ -27,7 +27,7 @@
                         to="/signup" 
                         class="w-100 btn btn-lg btn-outline-primary" 
                         role="button" 
-                        @keydown="handleKeydown"
+                        v-on:keydown="handleKeydown"
                     >
                         Sign Up
                     </router-link>

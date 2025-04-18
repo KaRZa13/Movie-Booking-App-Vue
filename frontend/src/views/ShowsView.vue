@@ -16,7 +16,7 @@
             <div class="row" v-else>
                 <div v-for="show in shows" :key="show.show_id" class="col">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" :src="require('@/assets/' + show.imagePath)" alt="Card image cap"
+                        <img class="card-img-top" :src="require('@/assets/' + show.imagePath)" alt="Card cap"
                             height="450">
                         <div class="card-body">
                             <h5 class="card-title">{{ show.name }}</h5>
