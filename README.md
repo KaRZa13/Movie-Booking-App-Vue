@@ -46,3 +46,9 @@ python main.py
 cd frontend
 npm run serve
 ```
+
+
+## Workflow
+
+![image](https://github.com/user-attachments/assets/b2164a53-5da0-43aa-b632-294e9b522a59)
+
