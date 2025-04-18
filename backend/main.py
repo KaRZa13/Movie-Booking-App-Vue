@@ -795,4 +795,4 @@ if __name__ == '__main__':
     t2 = threading.Thread(target=user_monthly_report_job)
     t2.daemon = True
     t2.start()
-    app.run(debug=True, port=5001)
+    app.run(port=5001)
